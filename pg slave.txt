@@ -1,0 +1,23 @@
+version: "3.5"
+services:
+   postgresql-slave:
+    image: bitnami/postgresql:12
+    container_name: postgresql-slave
+    restart: on-failure
+    ports:
+      - '5445:5432'
+    volumes:
+      - /home/ubuntu/pg-slave/DATABASE:/app
+      - /home/ubuntu/pg-slave/DATABASE/data:/bitnami/postgresql
+      - /home/ubuntu/pg-slave/DATABASE/postgresconfig/:/bitnami/postgresql/conf/
+    environment:
+      - POSTGRESQL_REPLICATION_MODE=slave
+      - POSTGRESQL_REPLICATION_USER=repl_bms
+      - POSTGRESQL_REPLICATION_PASSWORD=Redt_MF5_Upa9
+      - POSTGRESQL_MASTER_HOST=10.33.11.9
+      - POSTGRESQL_PASSWORD=Redt_MF5_Upa9
+      - POSTGRESQL_MASTER_PORT_NUMBER=5444
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRESQL_TIMEZONE=GMT+6
+      - POSTGRESQL_LOG_TIMEZONE=GMT+6
+

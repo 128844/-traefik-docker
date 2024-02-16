@@ -1,0 +1,22 @@
+version: "3.5"
+services:
+
+  postgressql-master:
+    image: 'bitnami/postgresql:12'
+    container_name: postgressql-master
+    ports:
+      - '5444:5432'
+    volumes:
+      - /home/ubuntu/pg-master/DATABASE/data:/bitnami/postgresql
+      - /home/ubuntu/pg-master/DATABASE/postgresconfig/:/bitnami/postgresql/conf/
+      - /home/ubuntu/pg-master/DATABASE/app/DBbackup/DBbackupfile/:/DATABASE/app/DBbackup/DBbackupfile/
+    environment:
+      - POSTGRESQL_REPLICATION_MODE=master
+      - POSTGRESQL_REPLICATION_USER=repl_bms
+      - POSTGRESQL_REPLICATION_PASSWORD=Redt_MF5_Upa9
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=Redt_MF5_Upa9
+      - POSTGRES_MULTIPLE_DATABASES=BMS_NEW, dpay
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_TIMEZONE=GMT+6
+      - POSTGRESQL_LOG_TIMEZONE=GMT+6
