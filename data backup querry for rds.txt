@@ -1,0 +1,6 @@
+EXEC rdsadmin..rds_set_configuration 'S3 backup compression', 'false'
+EXEC msdb.dbo.rds_backup_database
+        @source_db_name = 'finify',  -- Replace with your database name
+        @s3_arn_to_backup_to = 'arn:aws:s3:::new-sudan-backup-160523/finify.bak', -- Replace with your S3 bucket and folder path
+        @overwrite_s3_backup_file = 1;
+EXEC msdb.dbo.rds_task_status
